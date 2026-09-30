@@ -1,0 +1,24 @@
+{
+  "name": "aio",
+  "version": "0.1.0",
+  "description": "AI Office в Claude Code: MCP-подключение к CRM (сделки, контакты, задачи, продукты, офферы, кампании) и навык работы с ней без типичных ошибок.",
+  "author": {
+    "name": "AI Office"
+  },
+  "keywords": ["crm", "mcp", "ai-office", "aio"],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Ключ MCP AI Office",
+      "description": "Кабинет AI Office → Настройки → «Ключи MCP» → «Создать». Ключ показывается один раз и привязан к одной компании; разделы отмечаются галочками.",
+      "required": true,
+      "sensitive": true
+    },
+    "host": {
+      "type": "string",
+      "title": "Адрес AI Office",
+      "description": "Без завершающего слэша. Менять только для своего развёртывания.",
+      "default": "https://chic-nature-production-30ea.up.railway.app"
+    }
+  }
+}

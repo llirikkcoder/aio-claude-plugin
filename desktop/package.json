@@ -1,0 +1,17 @@
+{
+  "name": "aio-desktop-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI Office для Claude Desktop: расширение .mcpb с мостом stdio → MCP AI Office",
+  "scripts": {
+    "validate": "mcpb validate manifest.json",
+    "pack": "npm run validate && npm prune --omit=dev --no-audit --no-fund && npx -y @anthropic-ai/mcpb@2.1.2 pack . aio.mcpb; npm install --no-audit --no-fund"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.31.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^2.1.2"
+  }
+}

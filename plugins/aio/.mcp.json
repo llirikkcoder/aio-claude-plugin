@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "aio": {
+      "type": "http",
+      "url": "${user_config.host}/mcp-http/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  }
+}

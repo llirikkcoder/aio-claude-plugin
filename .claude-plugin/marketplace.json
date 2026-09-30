@@ -1,0 +1,17 @@
+{
+  "name": "aio",
+  "owner": {
+    "name": "AI Office"
+  },
+  "metadata": {
+    "description": "Плагины AI Office для Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "aio",
+      "source": "./plugins/aio",
+      "description": "Подключение к CRM AI Office по MCP: сделки, контакты, задачи, продукты, офферы, кампании",
+      "category": "productivity"
+    }
+  ]
+}
