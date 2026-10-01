@@ -43,13 +43,12 @@ AIO_KEY=<ключ> bash plugins/aio/scripts/check.sh
 
 ## Claude Desktop
 
-**Расширение (рекомендуется).** Соберите `aio.mcpb` или возьмите готовый:
+**Расширение (рекомендуется).** Скачайте готовый
+[`aio.mcpb`](https://github.com/llirikkcoder/aio-claude-plugin/releases/latest/download/aio.mcpb)
+из [релизов](https://github.com/llirikkcoder/aio-claude-plugin/releases) или
+соберите сами: `cd desktop && npm install && npm run pack`.
 
-```
-cd desktop && npm install && npm run pack
-```
-
-Двойной клик по `desktop/aio.mcpb` → «Установить» → вставить ключ. Node на
+Двойной клик по `aio.mcpb` → «Установить» → вставить ключ. Node на
 компьютере не нужен: Desktop запускает расширение своим. Ключ хранится в
 системной связке ключей.
 
