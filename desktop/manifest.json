@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "aio",
   "display_name": "AI Office",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CRM AI Office в Claude Desktop: сделки, контакты, задачи, продукты, офферы, кампании.",
   "long_description": "Подключает Claude Desktop к MCP-серверу AI Office по ключу компании. Ключ выпускается в кабинете: Настройки → «Ключи MCP» → «Создать». Ключ привязан к одной компании, права — по разделам, отмеченным при выпуске. Хранится в системной связке ключей.",
   "author": {
@@ -15,8 +15,7 @@
       "command": "node",
       "args": ["${__dirname}/server/index.js"],
       "env": {
-        "AIO_KEY": "${user_config.api_key}",
-        "AIO_HOST": "${user_config.host}"
+        "AIO_KEY": "${user_config.api_key}"
       }
     }
   },
@@ -27,13 +26,6 @@
       "description": "Кабинет AI Office → Настройки → «Ключи MCP» → «Создать». Показывается один раз.",
       "sensitive": true,
       "required": true
-    },
-    "host": {
-      "type": "string",
-      "title": "Адрес AI Office",
-      "description": "Менять только для своего развёртывания.",
-      "default": "https://chic-nature-production-30ea.up.railway.app",
-      "required": false
     }
   },
   "tools_generated": true,
