@@ -2,7 +2,7 @@
   "mcpServers": {
     "aio": {
       "type": "http",
-      "url": "${user_config.host}/mcp-http/mcp",
+      "url": "${AIO_HOST:-https://chic-nature-production-30ea.up.railway.app}/mcp-http/mcp",
       "headers": {
         "Authorization": "Bearer ${user_config.api_key}"
       }
