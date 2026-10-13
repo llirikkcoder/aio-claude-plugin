@@ -6,6 +6,15 @@
 # Ключ берётся только из переменной окружения, не из аргумента: аргументы
 # видны в списке процессов и оседают в истории оболочки.
 #
+# ИМЯ ПЕРЕМЕННОЙ. По умолчанию AIO_KEY, а если её нет, то AI_OFFICE_MCP_KEY: под
+# таким именем ключ хранят в окружении облачной сессии, и кабинет AI Office
+# предлагает именно его. Ключ другой компании лежит под своим именем (например
+# AI_OFFICE_MCP_KEY_36); назовите его так:
+#
+#   AIO_KEY_VAR=AI_OFFICE_MCP_KEY_36 bash check.sh
+#
+# Какая переменная прочитана, скрипт пишет в первой строке; значение не печатается.
+#
 # Как читать ответ: 401 — не принят ключ, 404 — неверный путь (рабочий —
 # /mcp-http/mcp, короткий /mcp-http не работает), 403 — ключ другой компании.
 set -u
@@ -14,14 +23,25 @@ HOST="${1:-${AIO_HOST:-https://chic-nature-production-30ea.up.railway.app}}"
 HOST="${HOST%/}"
 URL="$HOST/mcp-http/mcp"
 
-if [ -z "${AIO_KEY:-}" ]; then
-  echo "Нет ключа: запустите как  AIO_KEY=<ключ> bash $0" >&2
+KEY_VAR="${AIO_KEY_VAR:-}"
+if [ -z "$KEY_VAR" ]; then
+  if [ -n "${AIO_KEY:-}" ]; then KEY_VAR=AIO_KEY; else KEY_VAR=AI_OFFICE_MCP_KEY; fi
+fi
+# Имя идёт в косвенную подстановку ${!KEY_VAR}: пропускаем только имена переменных.
+case "$KEY_VAR" in
+  ""|*[!A-Za-z0-9_]*) echo "Недопустимое имя переменной с ключом: $KEY_VAR" >&2; exit 2 ;;
+esac
+KEY="${!KEY_VAR:-}"
+
+if [ -z "$KEY" ]; then
+  echo "Нет ключа: переменная $KEY_VAR пуста или не задана. Запустите как  AIO_KEY=<ключ> bash $0" >&2
+  echo "(или задайте AI_OFFICE_MCP_KEY, либо имя другой переменной через AIO_KEY_VAR=...)" >&2
   exit 2
 fi
 
 call() {
   curl -sS -o "$TMP" -w '%{http_code}' --max-time 30 "$URL" \
-    -H "Authorization: Bearer $AIO_KEY" \
+    -H "Authorization: Bearer $KEY" \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json, text/event-stream' \
     -d "$1"
@@ -33,6 +53,7 @@ body() { tr -d '\r' < "$TMP" | sed -n 's/^data: //; /^{/p'; }
 TMP=$(mktemp)
 trap 'rm -f "$TMP"' EXIT
 
+echo "Ключ: переменная $KEY_VAR"
 echo "Адрес: $URL"
 code=$(call '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"aio-check","version":"0.1.0"}}}')
 case "$code" in

@@ -13,7 +13,8 @@ allowed-tools: mcp__plugin_aio_aio__get_context, mcp__plugin_aio_aio__list_deals
    - если ключ не задан или неверный — `/plugin` → aio → Configure, вписать
      ключ из кабинета AI Office (Настройки → «Ключи MCP» → «Создать»);
    - для проверки без Claude:
-     `AIO_KEY=<ключ> bash ${CLAUDE_PLUGIN_ROOT}/scripts/check.sh`
+     `AIO_KEY=<ключ> bash ${CLAUDE_PLUGIN_ROOT}/scripts/check.sh` (читает также
+     `AI_OFFICE_MCP_KEY`; ключ другой компании — `AIO_KEY_VAR=<имя переменной>`)
      (401 — ключ не принят, 404 — неверный адрес, 403 — ключ другой компании).
    На этом остановись.
 2. Если ответил — назови компанию (`company_id_from_header`).
