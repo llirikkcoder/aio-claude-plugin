@@ -1,6 +1,6 @@
 {
   "name": "aio",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AI Office в Claude Code: MCP-подключение к CRM (сделки, контакты, задачи, продукты, офферы, кампании) и навык работы с ней без типичных ошибок.",
   "author": {
     "name": "AI Office"
